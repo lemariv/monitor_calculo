@@ -170,13 +170,12 @@ def conversa():
         mensagens_para_api = [st.session_state.historico[0]] + ultimas_mensagens #junta as 6 ultimas mensagens com o prompt
 
         mensagens_para_api[-1] = {"role": "user", "content": resposta_modelo}  # substitui a última mensagem do usuário pelo conteúdo atualizado com os documentos de apoio
-        
         with st.chat_message("assistant"):
-            #resposta do modelo, usando a api da openai, que leva o historico de msgms, o modelo e o maximo de tokens que o modelo pode mostrar no chat
             try:
-                resposta_andamento = conexao.chat.completions.create( #o sistema da openai leva a mensagem do user e retorna uma resposta do modelo, leva o historico, o modelo e o maximo de tokens que o modelo pode mostrar no chat
+                resposta_andamento = conexao.chat.completions.create(
                     model="meta-llama/Llama-3.1-8B-Instruct",
-                    messages=mensagens_para_api #ia recebe tudo, o historico, o system, o assistant e user
+                    messages=mensagens_para_api,
+                    extra_body={"provider": "groq"}
                 )
                 resposta_processada = resposta_andamento.choices[0].message.content #pega a resposta do modelo, poe na posicao 0 (a primeira), tira os espacos em branco
                 st.markdown(resposta_processada) #exibe a resposta do modelo no chat
