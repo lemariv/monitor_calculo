@@ -14,11 +14,12 @@ import datetime
 load_dotenv()
 hf_token = os.getenv("HF_TOKEN")
 hf_dataset_token = os.getenv("HF_DATASET_TOKEN")
+groq_api_key = os.getenv("GROQ_API_KEY")
 
-# conexao com o Hugging Face
+# conexao com o provedor de IA (Groq - rapido e gratuito)
 conexao = OpenAI(
-    base_url="https://router.huggingface.co/v1/",
-    api_key=hf_token
+    base_url="https://api.groq.com/openai/v1",
+    api_key=groq_api_key
 )
 
 @st.cache_resource
@@ -173,16 +174,15 @@ def conversa():
         with st.chat_message("assistant"):
             try:
                 resposta_andamento = conexao.chat.completions.create(
-                    model="meta-llama/Llama-3.1-8B-Instruct",
-                    messages=mensagens_para_api,
-                    extra_body={"provider": "groq"}
+                    model="qwen/qwen3.8-27b",
+                    messages=mensagens_para_api
                 )
                 resposta_processada = resposta_andamento.choices[0].message.content #pega a resposta do modelo, poe na posicao 0 (a primeira), tira os espacos em branco
                 st.markdown(resposta_processada) #exibe a resposta do modelo no chat
                 st.session_state.historico.append({"role": "assistant", "content": resposta_processada}) #adc a resposta do modelo no historico
 
             except Exception as e:
-                st.error("Falha na comunicação com o Hugging Face")
+                st.error("Falha na comunicação com o servidor de IA")
                 st.error(str(e))
 
                 if hasattr(e, 'response'):
