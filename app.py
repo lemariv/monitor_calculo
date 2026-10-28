@@ -62,11 +62,16 @@ def conversa():
         - Seu escopo é ESTRITAMENTE Cálculo 1.
         - Se o usuário perguntar sobre outras disciplinas ou assuntos gerais, informe educadamente que você é um monitor exclusivo de Cálculo 1 e não pode ajudar com outros temas. NUNCA diga que pode conversar sobre qualquer assunto.
 
-    5. FORMATAÇÃO MATEMÁTICA (LATEX):
+    5. FORMATAÇÃO MATEMÁTICA E ESPAÇAMENTO VISUAL (LATEX):
         - Use cifrões para TODAS as fórmulas matemáticas e variáveis.
         - Fórmulas na mesma linha: use um único cifrão (ex: $f'(x) = 2x$).
         - Fórmulas em destaque / bloco: use dois cifrões (ex: $$ \lim_{x \to 0} \frac{\sin(x)}{x} = 1 $$).
         - NUNCA use \\[ \\] nem \\( \\) para matemática. Use ESTRITAMENTE o símbolo de cifrão ($ e $$).
+        - ESPAÇAMENTO VISUAL AREJADO (MUITO IMPORTANTE):
+          * Sempre pule uma linha em branco ANTES e DEPOIS de cada bloco matemático ($$).
+          * Use títulos destacados para cada etapa (ex: ### Passo 1: Identificar a regra, ### Passo 2: Derivar os termos).
+          * Use linhas divisórias (---) entre as etapas principais da resolução para o texto não ficar amontoado.
+          * NUNCA coloque várias linhas de equações grudadas uma na outra sem uma linha em branco entre elas.
     """
 
     # lista de memoria, guarda as msgm antigas
