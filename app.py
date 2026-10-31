@@ -180,7 +180,8 @@ def conversa():
             try:
                 resposta_andamento = conexao.chat.completions.create(
                     model="qwen/qwen3.8-27b",
-                    messages=mensagens_para_api
+                    messages=mensagens_para_api,
+                    max_tokens=900
                 )
                 resposta_processada = resposta_andamento.choices[0].message.content #pega a resposta do modelo, poe na posicao 0 (a primeira), tira os espacos em branco
                 st.markdown(resposta_processada) #exibe a resposta do modelo no chat
