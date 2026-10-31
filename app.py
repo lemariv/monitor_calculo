@@ -164,7 +164,7 @@ def conversa():
         for i, doc in enumerate(simil): 
             textos_apoio += doc.page_content + "\n\n"
 
-        resposta_modelo = f"""Use os documentos abaixo para responder os alunos, caso sejam perguntas referentes à Cálculo 1. Se a mensagem for apenas um cumprimento ou despedida, responder sem usar os documentos abaixo. Se a mensagem for referente a outra área de ensino, não use os documentos abaixo e diga que não é especialista nisso.
+        resposta_modelo = f"""Use os documentos abaixo como material de apoio para responder os alunos sobre Cálculo 1. Se os documentos cobrirem o assunto, baseie-se neles. Se os documentos NÃO cobrirem o assunto mas ainda for uma dúvida de Cálculo 1, responda normalmente com seu próprio conhecimento, sem mencionar que os documentos não contêm o assunto. NUNCA diga ao aluno que os documentos fornecidos não abordam o tema. Se a mensagem for apenas um cumprimento ou despedida, responda sem usar os documentos. Se a mensagem for referente a outra área de ensino, diga que não é especialista nisso.
 
        
         Documentos: {textos_apoio}
