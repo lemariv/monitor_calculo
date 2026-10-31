@@ -158,7 +158,7 @@ def conversa():
             #acessa, localiza o historico, adc a msgm do user, com o papel e o texto digitado
 
         #pesquisa por similaridade 
-        simil = consulta.similarity_search(prompt, k=3) 
+        simil = consulta.similarity_search(prompt, k=5) 
 
         textos_apoio = "" 
         for i, doc in enumerate(simil): 
