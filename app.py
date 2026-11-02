@@ -211,6 +211,7 @@ def conversa():
                         repo_type="dataset")
                 except Exception as e_save:
                     print(f"Erro ao salvar historico automatico: {e_save}")
+                    st.warning(f"⚠️ Debug salvamento: {e_save}")
 
             except Exception as e:
                 st.error("Falha na comunicação com o servidor de IA")
