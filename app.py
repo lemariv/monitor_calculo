@@ -195,6 +195,23 @@ def conversa():
                 st.markdown(resposta_processada) #exibe a resposta do modelo no chat
                 st.session_state.historico.append({"role": "assistant", "content": resposta_processada}) #adc a resposta do modelo no historico
 
+                # salva automaticamente a conversa no dataset do HuggingFace apos cada resposta
+                try:
+                    df_auto = pd.DataFrame(st.session_state.historico[1:]) #ignora o system prompt
+                    csv_auto = io.BytesIO()
+                    df_auto.to_csv(csv_auto, index=False)
+                    csv_auto.seek(0)
+                    api_auto = HfApi(token=hf_dataset_token)
+                    if "id_conversa" not in st.session_state: #cria um id unico por sessao de conversa
+                        st.session_state.id_conversa = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+                    api_auto.upload_file(
+                        path_or_fileobj=csv_auto,
+                        path_in_repo=f"conversas/conversa_{st.session_state.id_conversa}.csv",
+                        repo_id="leticia2006/historico-bot",
+                        repo_type="dataset")
+                except Exception as e_save:
+                    print(f"Erro ao salvar historico automatico: {e_save}")
+
             except Exception as e:
                 st.error("Falha na comunicação com o servidor de IA")
                 st.error(str(e))
