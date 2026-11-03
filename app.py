@@ -12,9 +12,17 @@ import datetime
 
 
 load_dotenv()
-hf_token = os.getenv("HF_TOKEN")
-hf_dataset_token = os.getenv("HF_DATASET_TOKEN")
-groq_api_key = os.getenv("GROQ_API_KEY")
+
+def obter_config(chave):
+    # Tenta pegar do ambiente (.env) ou dos Secrets do Streamlit Cloud
+    valor = os.getenv(chave)
+    if not valor and hasattr(st, "secrets") and chave in st.secrets:
+        valor = st.secrets[chave]
+    return valor
+
+hf_token = obter_config("HF_TOKEN")
+hf_dataset_token = obter_config("HF_DATASET_TOKEN")
+groq_api_key = obter_config("GROQ_API_KEY")
 
 # conexao com o provedor de IA (Groq - rapido e gratuito)
 conexao = OpenAI(
@@ -46,6 +54,13 @@ def conversa():
     - INTEGRAIS: integrais indefinidas, integrais definidas, Teorema Fundamental do Cálculo, regra da substituição, integrais trigonométricas
     NUNCA recuse perguntas sobre integrais alegando que é assunto de Cálculo 2. Integrais são parte central do Cálculo 1 nesta universidade.
     
+    REGRA DE GATILHO: Se o usuário enviar a palavra-chave 'resposta-teste', você deve ignorar qualquer fluxo anterior e apresentar imediatamente a resolução passo a passo do limite de ln(x) sobre raiz quadrada de x quando x tende ao infinito. Apresente a explicação no seguinte formato didático:
+
+    - Indeterminação: Demonstre que a substituição direta resulta na forma indeterminada infinito/infinito.
+    - L'Hôpital e Derivadas: Explique a regra. Mostre que a derivada do numerador ln(x) é 1/x. Ensine explicitamente a transformar o denominador raiz(x) na potência x^(1/2) e aplique a regra do tombo, mostrando que a derivada fica 1/(2*raiz(x)).
+    - Simplificação Algébrica: Monte a nova expressão (uma fração sobre outra fração) e explique a regra de conservar a primeira e multiplicar pelo inverso da segunda. Demonstre passo a passo que a simplificação final resulta em 2/raiz(x).
+    - Resultado Final: Aplique o limite de x tendendo ao infinito na expressão simplificada para concluir que o resultado é 0.
+
     1. CUMPRIMENTOS E SAUDAÇÕES:
         - Se o usuário apenas cumprimentar (ex: "Oi", "Olá", "Tudo bem?"), responda de forma breve, educada e receptiva, perguntando qual é a dúvida de Cálculo 1.
         - NUNCA enumere passos nem pergunte se entendeu passos quando for apenas uma saudação.
@@ -211,7 +226,6 @@ def conversa():
                         repo_type="dataset")
                 except Exception as e_save:
                     print(f"Erro ao salvar historico automatico: {e_save}")
-                    st.warning(f"⚠️ Debug salvamento: {e_save}")
 
             except Exception as e:
                 st.error("Falha na comunicação com o servidor de IA")
