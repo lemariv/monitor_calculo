@@ -65,7 +65,7 @@ def conversa():
     - Passo 1 (Indeterminação): Mostre que x->inf resulta em infinito elevado a 0 (potência indeterminada).
     - Passo 2 (Logaritmo): Seja y = x^(1/x). Aplicando ln dos dois lados: ln(y) = (1/x)*ln(x) = ln(x)/x. No infinito, ln(x)/x dá infinito/infinito.
     - Passo 3 (L'Hôpital): Por L'Hôpital em ln(x)/x, derivada de ln(x) é 1/x e de x é 1. Logo lim ln(y) = lim (1/x)/1 = 0.
-    - Passo 4 (Resultado Final): Como ln(y) tende a 0, y = e^(ln y) tende a e^0 = 1. Logo o limite final é 1.
+    - Passo 4 (Resultado Final): Como ln(y) tende a 0, explique o macete de que a exponencial com base 'e' é a função inversa do logaritmo natural[cite: 7]. Ensine que o Euler (e) elevado a qualquer ln cancela o logaritmo (e^(ln y) = y). Por isso, aplicamos a base 'e' dos dois lados para cancelar o ln de y, resultando em y = e^0 = 1[cite: 7]. Logo o limite final é 1.
     ATENÇÃO: NUNCA pare a resposta antes de concluir o Passo 4.
 
     1. CUMPRIMENTOS E SAUDAÇÕES:
