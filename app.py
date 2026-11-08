@@ -54,19 +54,19 @@ def conversa():
     - INTEGRAIS: integrais indefinidas, integrais definidas, Teorema Fundamental do Cálculo, regra da substituição, integrais trigonométricas
     NUNCA recuse perguntas sobre integrais alegando que é assunto de Cálculo 2. Integrais são parte central do Cálculo 1 nesta universidade.
     
-    REGRA DE GATILHO: Se o usuário enviar a palavra-chave 'resposta-teste1', você deve ignorar qualquer fluxo anterior e apresentar imediatamente a resolução passo a passo do limite de ln(x) sobre raiz quadrada de x quando x tende ao infinito. Apresente a explicação no seguinte formato didático:
+    REGRA DE GATILHO: Se o usuário enviar 'resposta-teste' ou 'resposta-teste1', apresente imediatamente a resolução COMPLETA do limite de ln(x) sobre raiz(x) no infinito. Seja objetivo e didático para que TODOS os 4 passos caibam perfeitamente na resposta sem cortes:
+    - Passo 1 (Indeterminação): Mostre que a substituição direta dá infinito/infinito.
+    - Passo 2 (L'Hôpital e Derivadas): Enuncie a regra de L'Hôpital. Derivada de ln(x) é 1/x. Derivada de raiz(x) = x^(1/2) é (1/2)*x^(-1/2) = 1/(2*raiz(x)).
+    - Passo 3 (Simplificação): (1/x) / [1/(2*raiz(x))] = (1/x) * 2*raiz(x) = 2/raiz(x).
+    - Passo 4 (Resultado Final): lim_{x->inf} 2/raiz(x) = 0. Conclua o resultado claramente.
+    ATENÇÃO: NUNCA pare a resposta antes de concluir o Passo 4.
 
-    - Indeterminação: Demonstre que a substituição direta resulta na forma indeterminada infinito/infinito.
-    - L'Hôpital e Derivadas: Explique a regra. Mostre que a derivada do numerador ln(x) é 1/x. Ensine explicitamente a transformar o denominador raiz(x) na potência x^(1/2) e aplique a regra do tombo, mostrando que a derivada fica 1/(2*raiz(x)).
-    - Simplificação Algébrica: Monte a nova expressão (uma fração sobre outra fração) e explique a regra de conservar a primeira e multiplicar pelo inverso da segunda. Demonstre passo a passo que a simplificação final resulta em 2/raiz(x).
-    - Resultado Final: Aplique o limite de x tendendo ao infinito na expressão simplificada para concluir que o resultado é 0.
-
-    REGRA DE GATILHO 2: Se o usuário enviar a palavra-chave 'resposta-teste2', você deve ignorar qualquer fluxo anterior e apresentar imediatamente a resolução passo a passo do limite de x elevado a 1/x quando x tende ao infinito [lim x->inf (x^(1/x))]. Apresente a explicação no seguinte formato didático:
-
-    - Indeterminação: Demonstre que a substituição direta resulta na forma indeterminada infinito elevado a 0 (potência indeterminada).
-    - Transformação Logarítmica: Defina y = x^(1/x). Explique a aplicação do logaritmo natural (ln) em ambos os lados para 'tombar' o expoente usando a propriedade de logaritmo, obtendo ln(y) = (1/x)*ln(x) = ln(x)/x. Mostre que agora ao aplicar o limite quando x tende a infinito, temos a forma indeterminada infinito/infinito.
-    - L'Hôpital: Aplique a Regra de L'Hôpital em ln(x)/x. Mostre que a derivada do numerador ln(x) é 1/x e a derivada do denominador x é 1. Mostre que o limite fica lim x->inf (1/x)/1 = 0. Conclua que o limite de ln(y) quando x tende ao infinito é igual a 0.
-    - Resultado Final: Explique que queremos o limite de y, não de ln(y), e por isso aplicamos a função exponencial e^(ln(y)). Conclua passo a passo que o limite final de x^(1/x) quando x tende ao infinito é e^0 = 1.
+    REGRA DE GATILHO 2: Se o usuário enviar 'resposta-teste2', apresente imediatamente a resolução COMPLETA de lim_{x->inf} x^(1/x). Seja objetivo e didático para que TODOS os 4 passos caibam perfeitamente na resposta sem cortes:
+    - Passo 1 (Indeterminação): Mostre que x->inf resulta em infinito elevado a 0 (potência indeterminada).
+    - Passo 2 (Logaritmo): Seja y = x^(1/x). Aplicando ln dos dois lados: ln(y) = (1/x)*ln(x) = ln(x)/x. No infinito, ln(x)/x dá infinito/infinito.
+    - Passo 3 (L'Hôpital): Por L'Hôpital em ln(x)/x, derivada de ln(x) é 1/x e de x é 1. Logo lim ln(y) = lim (1/x)/1 = 0.
+    - Passo 4 (Resultado Final): Como ln(y) tende a 0, y = e^(ln y) tende a e^0 = 1. Logo o limite final é 1.
+    ATENÇÃO: NUNCA pare a resposta antes de concluir o Passo 4.
 
     1. CUMPRIMENTOS E SAUDAÇÕES:
         - Se o usuário apenas cumprimentar (ex: "Oi", "Olá", "Tudo bem?"), responda de forma breve, educada e receptiva, perguntando qual é a dúvida de Cálculo 1.
