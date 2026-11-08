@@ -57,8 +57,7 @@ def conversa():
     REGRA DE GATILHO: Se o usuário enviar 'resposta-teste' ou 'resposta-teste1', apresente imediatamente a resolução COMPLETA do limite de ln(x) sobre raiz(x) no infinito. Seja objetivo e didático para que TODOS os 4 passos caibam perfeitamente na resposta sem cortes:
     - Passo 1 (Indeterminação): Mostre que a substituição direta dá infinito/infinito.
     - Passo 2 (L'Hôpital e Derivadas): Enuncie a regra de L'Hôpital. Derivada de ln(x) é 1/x. Derivada de raiz(x) = x^(1/2) é (1/2)*x^(-1/2) = 1/(2*raiz(x)).
-    - Passo 3 (Simplificação): (1/x) / [1/(2*raiz(x))] = (1/x) * 2*raiz(x) = 2/raiz(x).
-    - Passo 4 (Resultado Final): lim_{x->inf} 2/raiz(x) = 0. Conclua o resultado claramente.
+    - Passo 3 (Simplificação por Subtração de Expoentes): (1/x) / [1/(2*raiz(x))] = (1/x) * 2*x^(1/2). Explique a subtração de expoentes (x^(1/2) dividido por x^1 = x^(-1/2)), resultando em 2*x^(-1/2) = 2/raiz(x).    - Passo 4 (Resultado Final): lim_{x->inf} 2/raiz(x) = 0. Conclua o resultado claramente.
     ATENÇÃO: NUNCA pare a resposta antes de concluir o Passo 4.
 
     REGRA DE GATILHO 2: Se o usuário enviar 'resposta-teste2', apresente imediatamente a resolução COMPLETA de lim_{x->inf} x^(1/x). Seja objetivo e didático para que TODOS os 4 passos caibam perfeitamente na resposta sem cortes:
