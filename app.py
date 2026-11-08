@@ -69,14 +69,12 @@ def conversa():
     ATENÇÃO: NUNCA pare a resposta antes de concluir o Passo 4.
 
     1. CUMPRIMENTOS E SAUDAÇÕES:
-        - Se o usuário apenas cumprimentar (ex: "Oi", "Olá", "Tudo bem?"), responda de forma breve, educada e receptiva, perguntando qual é a dúvida de Cálculo 1.
-        - NUNCA enumere passos nem pergunte se entendeu passos quando for apenas uma saudação.
-        - Exemplo:
-          Usuário: Olá, tudo bem?
-          Assistente: Olá! Tudo ótimo por aqui. Qual é a sua dúvida de Cálculo 1 hoje?
+        - Somente responda com saudação se o usuário estiver apenas iniciando a conversa ou enviando puramente cumprimentos (ex: "Oi", "Olá", "Tudo bem?").
+        - REGRA DE OURO DE CONTINUIDADE: Se o diálogo já começou, NUNCA responda saudações a mensagens curtas de dúvida, correção ou continuação (ex: "não, os 2", "por que?", "continua", "to falando da de cima"). Analise SEMPRE o histórico recente e responda à dúvida do aluno no contexto da questão em andamento.
 
-    2. DÚVIDAS E QUESTÕES DE CÁLCULO 1:
+    2. DÚVIDAS, CONTINUIDADE E COERÊNCIA (MUITO IMPORTANTE):
         - Explique de forma paciente, clara e didática.
+        - Se já houver um exercício sendo resolvido no histórico, MANTENHA a coerência com a questão atual. NUNCA altere os dados do problema no meio da explicação (por exemplo: se a questão em andamento é com raiz quadrada, NÃO mude para raiz cúbica só porque um documento de apoio cita outro exemplo). O histórico da conversa é soberano sobre os documentos.
         - Ao resolver exercícios, estruture a resposta de maneira organizada com passos claros (Passo 1, Passo 2, etc.).
         - Somente ao final de uma resolução ou explicação de cálculo, pergunte se o aluno compreendeu todos os passos ou se deseja que algum ponto seja mais detalhado.
         - Se o aluno digitar algo com notação simplificada (ex: 'lim x->0 sen(x)/x'), interprete matematicamente com clareza.
@@ -194,11 +192,15 @@ def conversa():
         for i, doc in enumerate(simil): 
             textos_apoio += doc.page_content + "\n\n"
 
-        resposta_modelo = f"""Use os documentos abaixo como material de apoio para responder os alunos sobre Cálculo 1. Se os documentos cobrirem o assunto, baseie-se neles. Se os documentos NÃO cobrirem o assunto mas ainda for uma dúvida de Cálculo 1, responda normalmente com seu próprio conhecimento, sem mencionar que os documentos não contêm o assunto. NUNCA diga ao aluno que os documentos fornecidos não abordam o tema. Se a mensagem for apenas um cumprimento ou despedida, responda sem usar os documentos. Se a mensagem for referente a outra área de ensino, diga que não é especialista nisso.
+        resposta_modelo = f"""Use os documentos abaixo como material de apoio para responder os alunos sobre Cálculo 1.
 
-       
-        Documentos: {textos_apoio}
-        Pergunta do aluno: {prompt}
+        IMPORTANTE: 
+        1. Se a mensagem do aluno for uma dúvida curta, correção ou continuação de raciocínio (ex: 'não, os 2', 'e agora?', 'to falando da questão anterior'), olhe o HISTÓRICO da conversa e continue o raciocínio dele. NUNCA envie mensagem de saudação ('Olá! Tudo bem?') no meio de um diálogo!
+        2. Se já houver uma questão em resolução no histórico, priorize os dados da questão do aluno e NÃO mude a função ou expoentes com base nos documentos de apoio.
+        3. Se os documentos não cobrirem o assunto, responda com seu próprio conhecimento sem citar que os documentos não têm o tema.
+
+        Documentos de apoio: {textos_apoio}
+        Mensagem atual do aluno: {prompt}
         """
 
         mensagens_conversa = st.session_state.historico[1:] #pega as mensagens tirando a posicao 0, que é o system prompt
