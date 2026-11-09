@@ -210,12 +210,21 @@ def conversa():
         mensagens_para_api[-1] = {"role": "user", "content": resposta_modelo}  # substitui a última mensagem do usuário pelo conteúdo atualizado com os documentos de apoio
         with st.chat_message("assistant"):
             try:
-                resposta_andamento = conexao.chat.completions.create(
-                    model="llama-3.3-70b-versatile",
-                    messages=mensagens_para_api,
-                    max_tokens=1500
-                )
-                resposta_processada = resposta_andamento.choices[0].message.content #pega a resposta do modelo, poe na posicao 0 (a primeira), tira os espacos em branco
+                # Tenta primeiro o Llama 8B (limite alto e sem bloqueio no Groq gratuito)
+                # Se falhar, usa o Qwen que ja funcionava na sua conta
+                try:
+                    resposta_andamento = conexao.chat.completions.create(
+                        model="llama-3.1-8b-instant",
+                        messages=mensagens_para_api,
+                        max_tokens=1500
+                    )
+                except Exception:
+                    resposta_andamento = conexao.chat.completions.create(
+                        model="qwen/qwen3.8-27b",
+                        messages=mensagens_para_api,
+                        max_tokens=950
+                    )
+                resposta_processada = resposta_andamento.choices[0].message.content
                 st.markdown(resposta_processada) #exibe a resposta do modelo no chat
                 st.session_state.historico.append({"role": "assistant", "content": resposta_processada}) #adc a resposta do modelo no historico
 
